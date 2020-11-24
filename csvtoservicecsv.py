@@ -1,16 +1,18 @@
-import csv
 from get_by_id import *
+import logging
 
+logging.basicConfig(level=logging.INFO)
+
+"""
+    this script calls call_mock_rest() in get_by_id.py which takes 'location' column from person_file.csv
+    and fetches relevant data from PersonREST service
+"""
 with open('person_file.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     line_count = 0
 
     for row in csv_reader:
-        # if line_count == 0:
-        print(row)
-        print(f'Column names are {", ".join(row)}')
+        logging.info(row)
+        logging.info(f'Column names are {", ".join(row)}')
         call_mock_rest(row["location"])
-        # line_count += 1
-        print(f'\t{row["location"]}')
-        # line_count += 1
-    # print(f'Processed {line_count} lines.')
+        logging.info(f'\t{row["location"]}')
